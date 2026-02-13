@@ -3,12 +3,14 @@ import { motion } from 'motion/react';
 import { AlertTriangle } from 'lucide-react';
 import { ProjectSpexy } from './ProjectSpexy';
 
-const FUNNY_ASSETS = [
-  "https://images.unsplash.com/photo-1758598737850-d32f0ff00687?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGZ1bm55JTIwZmFjZSUyMHNpbGx5JTIwZXhwcmVzc2lvbnxlbnwxfHx8fDE3NzA5ODg5NTR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-  "https://images.unsplash.com/photo-1587014634329-dac89ca698d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYW5kaWQlMjBzbGVlcGluZyUyMHdvbWFuJTIwdGlyZWR8ZW58MXx8fHwxNzcwOTg4OTU1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-  "https://images.unsplash.com/photo-1709603928625-dba8eba95102?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGVhdGluZyUyMG1lc3N5JTIwZnVubnl8ZW58MXx8fHwxNzcwOTg4OTU1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-  "https://images.unsplash.com/photo-1639351823493-9e451eca0b5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMG1ha2luZyUyMHdlaXJkJTIwZmFjZSUyMGxhdWdoaW5nfGVufDF8fHx8MTc3MDk4ODk1Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-  "https://images.unsplash.com/photo-1770803204288-31382ee0daec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGNhc3VhbCUyMG1vbWVudCUyMGF1dGhlbnRpY3xlbnwxfHx8fDE3NzA5ODg5NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+// Local memory assets - mix of videos and images
+const MEMORY_ASSETS = [
+  { src: "/assets/1.mp4", type: "video" },
+  { src: "/assets/3.mp4", type: "video" },
+  { src: "/assets/4.mp4", type: "video" },
+  { src: "/assets/5.jpeg", type: "image" },
+  { src: "/assets/6.mp4", type: "video" },
+  { src: "/assets/7.jpeg", type: "image" },
 ];
 
 export function RoastSection() {
@@ -77,7 +79,7 @@ export function RoastSection() {
               duration: 30, // Adjust speed (lower is faster)
             }}
           >
-            {[...FUNNY_ASSETS, ...FUNNY_ASSETS].map((src, index) => (
+            {[...MEMORY_ASSETS, ...MEMORY_ASSETS].map((asset, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -91,13 +93,24 @@ export function RoastSection() {
                   <div className="w-full h-full rounded-2xl border-2 border-[#FCD34D]/20 group-hover:border-[#FCD34D]/50 transition-colors" />
                 </div>
 
-                {/* Image */}
+                {/* Image or Video */}
                 <div className="relative w-full h-full overflow-hidden bg-[#0F172A]">
-                  <img 
-                    src={src}
-                    alt={`Anomaly ${index + 1}`}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110"
-                  />
+                  {asset.type === "video" ? (
+                    <video
+                      src={asset.src}
+                      alt={`Anomaly ${index + 1}`}
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110"
+                      loop
+                      muted
+                      autoPlay
+                    />
+                  ) : (
+                    <img 
+                      src={asset.src}
+                      alt={`Anomaly ${index + 1}`}
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110"
+                    />
+                  )}
                   
                   {/* Scan line effect */}
                   <motion.div
@@ -116,7 +129,7 @@ export function RoastSection() {
                   {/* Data label overlay - always visible */}
                   <div className="absolute top-3 left-3 glassmorphism rounded-lg px-3 py-1 border border-[#FCD34D]/30">
                     <span className="text-[#FCD34D] text-xs font-mono">
-                      ANOMALY #{(index % FUNNY_ASSETS.length) + 1}
+                      ANOMALY #{(index % MEMORY_ASSETS.length) + 1}
                     </span>
                   </div>
 
@@ -128,7 +141,7 @@ export function RoastSection() {
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   >
                     <p className="text-white text-sm font-mono mb-1">
-                      Data Point #{(index % FUNNY_ASSETS.length) + 1}
+                      Data Point #{(index % MEMORY_ASSETS.length) + 1}
                     </p>
                     <p className="text-[#94A3B8] text-xs">
                       Classification: Outlier

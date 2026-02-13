@@ -10,10 +10,9 @@ import { HeartfeltNote } from './components/HeartfeltNote';
 import { ValentineProposal } from './components/ValentineProposal';
 
 function App() {
-  // Image URLs from Unsplash
-  const heroImage = "https://images.unsplash.com/photo-1761253298457-d98f628e1b1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwb3J0cmFpdCUyMHdvbWFuJTIwc21pbGluZyUyMGhhcHB5JTIwYmlydGhkYXl8ZW58MXx8fHwxNzcwOTg3MTc1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
-  
-  const memoryImage = "https://images.unsplash.com/photo-1593824261342-fd6ee146f73d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob3NwaXRhbCUyMHJvb20lMjByb21hbnRpYyUyMG1lbW9yeXxlbnwxfHx8fDE3NzA5ODcxNzV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
+  // Local asset paths - your personal photos/videos
+  const heroImage = "/assets/9.jpeg";  // Main birthday portrait
+  const memoryImage = "/assets/8.jpeg";  // Secret hospital memory
 
   return (
     <div className="min-h-screen bg-[#020617] overflow-x-hidden relative">

@@ -16,8 +16,8 @@ export function CakeSection() {
   }>>([]);
 
   useEffect(() => {
-    // Initialize audio - replace with your audio file
-    audioRef.current = new Audio('https://cdn.pixabay.com/audio/2022/03/10/audio_4a96b6c6c7.mp3');
+    // Initialize audio with your local birthday music
+    audioRef.current = new Audio('/assets/nastelbom-happy-birthday-471481.mp3');
     audioRef.current.loop = true;
     
     return () => {
