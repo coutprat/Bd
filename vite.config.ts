@@ -4,6 +4,7 @@
   import path from 'path';
 
   export default defineConfig({
+    base: '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -52,6 +53,14 @@
     build: {
       target: 'esnext',
       outDir: 'build',
+      minify: 'terser',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom', 'motion/react'],
+          },
+        },
+      },
     },
     server: {
       port: 3000,
